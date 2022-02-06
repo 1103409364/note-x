@@ -4,8 +4,8 @@ export default [
     link: "/others/markdown/",
     children: [
       {
-        text: "OneNote迁移Markdown",
-        link: "/others/markdown/OneNote迁移markdown",
+        text: "Vscode Markdown配置",
+        link: "/others/markdown/VscodeMarkdown",
       },
     ],
   },

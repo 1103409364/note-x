@@ -1,4 +1,4 @@
-# OneNote 迁移 Markdown
+# Vscode Markdown 配置
 
 编辑器有 vscode、typora 等可以选择，使用 vscode 需要装一些插件
 
@@ -43,7 +43,11 @@ zen mode: Ctrl + k z
 ## Paste Image
 
 把图片插入到 markdown，快捷键 Ctrl + Alt + V
-![Paste Image](示例图片.png){width="80%"}
+![Paste Image](./test.png){width="80%"}
+
+## Markdown Preview Github Styling
+
+更改 VS Code 的内置 markdown 预览以匹配 Github 的风格
 
 ## Markdown Preview Enhanced
 

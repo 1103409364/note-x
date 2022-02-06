@@ -1,6 +1,6 @@
 export default [
   {
-    text: "MarkDown",
+    text: "Markdown",
     link: "/others/markdown/",
     children: [
       {

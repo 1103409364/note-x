@@ -1,0 +1,22 @@
+{
+  "name": "note-x",
+  "version": "1.0.0",
+  "description": "note-x with vitepress",
+  "repository": "https://github.com/1103409364/note-x",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs",
+    "pages": "npm run build && bash scripts/deploy-gh.sh"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "vitepress": "^0.21.6"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-search": "^1.9.7",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^6.1.0"
+  }
+}

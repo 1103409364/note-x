@@ -8,7 +8,7 @@ zen mode: Ctrl + k z
 
 1. 提供快捷键和自动补全
 2. 支持生成目录
-3. 边书写一边预览(Ctrl + Shift + V or Ctrl + K V)
+3. 边书写边预览(Ctrl + Shift + V or Ctrl + K V)
 4. 可轻松转换为 HTML 文件和 PDF 文件
 5. 优化了 List editing 的编辑
 6. 格式化 table (Alt + Shift + F) 及 Task list (use Alt + C to check/uncheck a list item)

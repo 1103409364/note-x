@@ -4,7 +4,7 @@ export default [
     link: "/others/markdown/",
     children: [
       {
-        text: "OneNote迁移markdown",
+        text: "OneNote迁移Markdown",
         link: "/others/markdown/OneNote迁移markdown",
       },
     ],

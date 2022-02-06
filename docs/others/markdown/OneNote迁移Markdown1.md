@@ -1,6 +1,6 @@
-# OneNote 迁移 markdown
+# OneNote 迁移 Markdown
 
-编辑器 vscode、typora 可以选择，使用 vscode 需要装一些插件
+编辑器有 vscode、typora 等可以选择，使用 vscode 需要装一些插件
 
 zen mode: Ctrl + k z
 

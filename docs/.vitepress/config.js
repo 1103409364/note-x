@@ -51,7 +51,7 @@ module.exports = {
     nav: [
       { text: "前端", link: "/frontEnd/" },
       { text: "后端", link: "/backEnd/" },
-      { text: "运维", link: "/ops/" },
+      { text: "运维", link: "/devOps/" },
       { text: "其他", link: "/others/" },
       // {
       //   text: "相关链接",

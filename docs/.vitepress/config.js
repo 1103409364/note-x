@@ -10,25 +10,25 @@ module.exports = {
   // 头部head
   head: [["link", { rel: "icon", href: "/favicon.ico" }]], // 添加图标
   // 使用插件
-  plugins: [
-    "@vuepress/active-header-links",
-    "@vuepress/back-to-top",
-    "@vuepress/medium-zoom",
-    "@vuepress/nprogress",
-    [
-      "@vuepress/plugin-search",
-      {
-        locales: {
-          "/": {
-            placeholder: "Search",
-          },
-          "/zh/": {
-            placeholder: "搜索",
-          },
-        },
-      },
-    ],
-  ],
+  // plugins: [
+  //   "@vuepress/active-header-links",
+  //   "@vuepress/back-to-top",
+  //   "@vuepress/medium-zoom",
+  //   "@vuepress/nprogress",
+  //   [
+  //     "@vuepress/plugin-search",
+  //     {
+  //       locales: {
+  //         "/": {
+  //           placeholder: "Search",
+  //         },
+  //         "/zh/": {
+  //           placeholder: "搜索",
+  //         },
+  //       },
+  //     },
+  //   ],
+  // ],
   // 主题配置
   themeConfig: {
     repo: pkg.repository,
@@ -37,8 +37,8 @@ module.exports = {
     // lastUpdated: 'Last Updated', // string | boolean
     // 启动页面丝滑滚动
     smoothScroll: true,
-    editLinks: true,
-    editLinkText: "为此页提供修改建议",
+    // editLinks: true,
+    // editLinkText: "为此页提供修改建议",
     // https://segmentfault.com/a/1190000015010997 全站搜索，填写文档网站的地址和邮箱进行申请
     algolia: {
       apiKey: "b573aa848fd57fb47d693b531297403c",

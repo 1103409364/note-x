@@ -8,8 +8,8 @@ title 关于CSS
 
 ## 单行文本溢出隐藏
 
-## link和@import的区别
+## link 和@import 的区别
 
-## display:none与visibility:hidden的区别
+## display:none 与 visibility:hidden 的区别
 
-## z-index属性在什么情况下会失效
+## z-index 属性在什么情况下会失效

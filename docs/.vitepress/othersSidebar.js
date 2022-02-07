@@ -4,8 +4,8 @@ export default [
     link: "/others/markdown/",
     children: [
       {
-        text: "Vscode Markdown配置",
-        link: "/others/markdown/VscodeMarkdown",
+        text: "Vscode配置Markdown环境",
+        link: "/others/markdown/Vscode配置Markdown环境",
       },
     ],
   },

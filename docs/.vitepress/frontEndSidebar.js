@@ -27,7 +27,7 @@ export default [
     children: [
       {
         text: "Vite+Vue2+TS",
-        link: "/frontEnd/Vue/Vite+Vue2+TS",
+        link: "/frontEnd/Vue/ViteVue2TS",
       },
     ],
   },

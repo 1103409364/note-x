@@ -6,7 +6,7 @@ module.exports = {
   title: "Note-x", // 网站标题
   description: "Note-x with vitePress", // 网站描述
   dest: "./dist", // 打包目录
-  // base: "/docs/",
+  base: "/note-x/",
   // 头部head
   head: [["link", { rel: "icon", href: "/favicon.ico" }]], // 添加图标
   // 使用插件
@@ -41,11 +41,11 @@ module.exports = {
     // editLinkText: "为此页提供修改建议",
     // https://segmentfault.com/a/1190000015010997 全站搜索，填写文档网站的地址和邮箱进行申请
     algolia: {
-      apiKey: "b573aa848fd57fb47d693b531297403c",
+      apiKey: "a13e112ab3ca2b0038a9df3fae771fb3",
       indexName: "note-x",
-      searchParameters: {
-        facetFilters: ["tags:cn"],
-      },
+      // searchParameters: {
+      //   facetFilters: ["tags:cn"],
+      // },
     },
     // 导航栏配置
     nav: [

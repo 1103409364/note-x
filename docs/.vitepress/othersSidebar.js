@@ -9,4 +9,14 @@ export default [
       },
     ],
   },
+  {
+    text: "VitePress",
+    link: "/others/vitepress/",
+    children: [
+      {
+        text: "VitePress配置",
+        link: "/others/vitepress/VitePress配置",
+      },
+    ],
+  },
 ];

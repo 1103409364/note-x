@@ -39,7 +39,7 @@ Markdown 快捷键，Markdown All in One 有快捷键，但数量较少，且不
 ## Paste Image
 
 把图片插入到 markdown，快捷键 Ctrl + Alt + V
-![Paste Image](./test.png){width="80%"}
+![Paste Image](./img/test.png){width="80%"}
 
 ## Markdown Preview Github Styling
 

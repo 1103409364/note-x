@@ -633,7 +633,7 @@ IE 不兼容 vite 的 svg 图标，无法显示。改为字体图标，用法和
 console.log("VITE_APP_TITLE:" + import.meta.env.VITE_APP_TITLE);
 ```
 
-**注意** 字符串不能直接用 `import.meta.env.`的方式使用，不然打包的时候会报错，可以用 `import.meta\u200b.env.VITE_APP_TITLE` 的方式使用
+**注意** 字符串不能直接用 `import.meta.env.`的方式使用，不然打包的时候会报错，可以用 `import.meta\u200b.env.VITE_APP_TITLE` 的方式使用。比如下面的标题 **vite.config.js 中使用 `import.meta.env.*`**，导致打包报错。
 
 ### 项目部署公共基础路径
 
@@ -643,7 +643,7 @@ console.log("VITE_APP_TITLE:" + import.meta.env.VITE_APP_TITLE);
 <https://vitejs.cn/guide/build.html#public-base-path>  
 <https://router.vuejs.org/zh/api/#base>
 
-### [vite.config.js 中使用`import.meta.env.*`](https://www.jianshu.com/p/4973bd983e96)
+### [vite.config.js 中使用 `import.meta\u200b.env.*`](https://www.jianshu.com/p/4973bd983e96)
 
 需求：不同环境配置不同的 base 路径，发布到不同的目录
 

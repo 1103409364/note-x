@@ -14,3 +14,10 @@ algolia 提供了简化的方式 Algolia DocSearch，提交自己的网站，然
 4. 在配置文件中添加如下内容, apiKey 和 indexName 就是上面邮件中的内容
 
 > 参考[VuePress 搭建个人技术文档网站教程](https://segmentfault.com/a/1190000017055963)
+
+## 打包报错
+
+可能是
+
+- .md 文件的文件名使用了特殊符号，如 `+`
+- 超链接里使用了 `import.meta.env.*`

@@ -23,9 +23,12 @@ export default [
   },
   {
     text: "Vue",
+    link: "/frontEnd/Vue/",
     children: [
-      { text: "基础", link: "/frontEnd/Vue/" },
-      { text: "进阶", link: "/frontEnd/Vue/advanced" },
+      {
+        text: "Vite+Vue2+TS",
+        link: "/frontEnd/Vue/Vite+Vue2+TS",
+      },
     ],
   },
   {
@@ -49,11 +52,11 @@ export default [
       { text: "进阶", link: "/frontEnd/Security/advanced" },
     ],
   },
-  {
-    text: "面经",
-    children: [
-      { text: "基础", link: "/frontEnd/Experience/" },
-      { text: "进阶", link: "/frontEnd/Experience/advanced" },
-    ],
-  },
+  // {
+  //   text: "面经",
+  //   children: [
+  //     { text: "基础", link: "/frontEnd/Experience/" },
+  //     { text: "进阶", link: "/frontEnd/Experience/advanced" },
+  //   ],
+  // },
 ];

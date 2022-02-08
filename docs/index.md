@@ -1,19 +1,16 @@
 ---
 home: true
-// heroImage: /favicon.ico
-heroAlt: Logo image
-heroText: Interview
-tagline: the website of Interview with VitePress
-actionText: Get Started
+lang: zh-CN
+heroText: A  Personal Blog
+heroImage: /favicon.ico
+actionText: 开始 →
 actionLink: /frontEnd/HTML/
 features:
-  - title: Widely
-    details: xx。
-  - title: Phased
-    details: xxx。
-  - title: Experience
-    details: xxxxx。
-footer: MIT Licensed | Copyright © 2021-present
+  - title: A Blog
+    details: 博客，记录日常所得。
+  - title: For Note-x
+    details: Now or never 🧑‍💻 🤔🎈🎉
+  - title: For Me
+    details: 长沙，已入坑 ღ( ´･ᴗ･` )
+footer: Copyright © 2022-present wcs
 ---
-
-<!-- # 笔记 -->

@@ -207,7 +207,7 @@ export default defineConfig({
 > [VUE 项目中的 commit 提交规范插件](https://blog.csdn.net/biraotian/article/details/113629230)  
 > [Vue 的 ESLint-stylelint-prettier 联合配置](https://blog.csdn.net/weixin_45191649/article/details/109818249)  
 > [eslint-plugin-vue 文档](https://eslint.vuejs.org/)  
-> [Vue 分隔指南](https://cn.vuejs.org/v2/style-guide/)  
+> [Vue 风格指南](https://cn.vuejs.org/v2/style-guide/)  
 > [prettier 与 Git 整合](https://zhuanlan.zhihu.com/p/81764012)：添加 lint-staged 提交代码时，使用 eslint fix 修复暂存的文件
 
 vue eslint 规则。模板组件名风格：帕斯卡，限制标签属性顺序

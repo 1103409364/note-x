@@ -38,13 +38,12 @@ Markdown 快捷键，Markdown All in One 有快捷键，但数量较少，且不
 
 ## Paste Image
 
-把图片插入到 markdown，快捷键 Ctrl + Alt + V
+把图片插入到 markdown，快捷键 Ctrl + Alt + V  
 ![Paste Image](./img/test.png){width="80%"}
-
-## Markdown Preview Github Styling
-
-更改 VS Code 的内置 markdown 预览以匹配 Github 的风格
 
 ## Markdown Preview Enhanced
 
-支持预览，右键导出 pdf，公式不会错乱
+- 提供更强的预览功能，支持切换不同的主题
+- 支持右键右键导出 pdf 等，公式不会错乱
+- 支持大纲、回到顶部等
+- 图片助手等辅助编辑功能

@@ -1,6 +1,8 @@
 const pkg = require("../../package.json");
-import frontEndSidebar from "./frontEndSidebar";
-import othersSidebar from "./othersSidebar";
+import frontEnd from "./router/frontEnd";
+import backEnd from "./router/backEnd";
+import devOps from "./router/devOps";
+import others from "./router/others";
 
 module.exports = {
   title: "Note-x", // 网站标题
@@ -9,7 +11,7 @@ module.exports = {
   base: "/note-x/",
   // 头部head
   head: [["link", { rel: "icon", href: "/favicon.ico" }]], // 添加图标
-  // 使用插件
+  // 使用插件 用不了
   // plugins: [
   //   "@vuepress/active-header-links",
   //   "@vuepress/back-to-top",
@@ -35,39 +37,32 @@ module.exports = {
     // logo: "/logo.svg",
     // 获取每个文件最后一次 git 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部
     // lastUpdated: 'Last Updated', // string | boolean
+    search: true, //内置搜索 用不了
+    searchMaxSuggestions: 10, //结果数量的限制
     // 启动页面丝滑滚动
     smoothScroll: true,
     // editLinks: true,
     // editLinkText: "为此页提供修改建议",
     // https://segmentfault.com/a/1190000015010997 全站搜索，填写文档网站的地址和邮箱进行申请
-    algolia: {
-      apiKey: "a13e112ab3ca2b0038a9df3fae771fb3",
-      indexName: "note-x",
-      // searchParameters: {
-      //   facetFilters: ["tags:cn"],
-      // },
-    },
+    // algolia: {
+    //   apiKey: "a13e112ab3ca2b0038a9df3fae771fb3",
+    //   indexName: "note-x",
+    //   searchParameters: {
+    //     facetFilters: ["tags:cn"],
+    //   },
+    // },
     // 导航栏配置
     nav: [
-      { text: "前端", link: "/frontEnd/" },
-      { text: "后端", link: "/backEnd/" },
-      { text: "运维", link: "/devOps/" },
-      { text: "其他", link: "/others/" },
-      // {
-      //   text: "相关链接",
-      //   items: [
-      //     {
-      //       text: "Twitter",
-      //       link: "https://twitter.com/vite_js",
-      //     },
-      //   ],
-      // },
+      { text: "前端", items: frontEnd },
+      // { text: "后端", link: backEnd },
+      // { text: "运维", link: devOps },
+      { text: "其他", items: others },
     ],
     sidebar: {
-      "/backEnd/": "auto",
-      "/ops/": "auto",
-      "/others/": othersSidebar,
-      "/": frontEndSidebar,
+      "/frontEnd": frontEnd,
+      "/backEnd/": backEnd,
+      "/ops/": devOps,
+      "/others/": others,
     },
   },
 };

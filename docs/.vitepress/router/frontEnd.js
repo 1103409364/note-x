@@ -1,14 +1,16 @@
 export default [
   {
     text: "HTML",
+    link: "/frontEnd/HTML/",
     children: [
-      { text: "基础", link: "/frontEnd/HTML/" },
+      { text: "基础", link: "/frontEnd/HTML/basic" },
       { text: "进阶", link: "/frontEnd/HTML/advanced" },
     ],
     sidebarDepth: 3,
   },
   {
     text: "CSS",
+    link: "/frontEnd/CSS/",
     children: [
       { text: "基础", link: "/frontEnd/CSS/" },
       { text: "进阶", link: "/frontEnd/CSS/advanced" },
@@ -16,6 +18,7 @@ export default [
   },
   {
     text: "Javascript",
+    link: "/frontEnd/Javascript/",
     children: [
       { text: "基础", link: "/frontEnd/Javascript/" },
       { text: "进阶", link: "/frontEnd/Javascript/advanced" },
@@ -33,13 +36,15 @@ export default [
   },
   {
     text: "浏览器",
+    link: "/frontEnd/browser/",
     children: [
-      { text: "基础", link: "/frontEnd/Vue/" },
-      { text: "进阶", link: "/frontEnd/Vue/advanced" },
+      { text: "基础", link: "/frontEnd/browser/" },
+      { text: "进阶", link: "/frontEnd/browser/advanced" },
     ],
   },
   {
     text: "网络",
+    link: "/frontEnd/Network/",
     children: [
       { text: "基础", link: "/frontEnd/Network/" },
       { text: "进阶", link: "/frontEnd/Network/advanced" },
@@ -47,6 +52,7 @@ export default [
   },
   {
     text: "安全",
+    link: "/frontEnd/Security/",
     children: [
       { text: "基础", link: "/frontEnd/Security/" },
       { text: "进阶", link: "/frontEnd/Security/advanced" },

@@ -64,5 +64,6 @@ module.exports = {
       "/ops/": devOps,
       "/others/": others,
     },
+    // 路由根路径和.vitepress 路径同级
   },
 };

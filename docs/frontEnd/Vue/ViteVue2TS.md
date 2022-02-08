@@ -376,27 +376,27 @@ interface 能实现就用 interface，否则用 type
 
 ### 组件 props 类型校验
 
-1. 使用 vue 的 props 校验+vue 提供的 PropType 增强校验，可以有默认值。
+**第一种方式** 使用 vue 的 props 校验+vue 提供的 PropType 增强校验，可以有默认值。
 
-   ```js
-   import { PropType } from "vue-demi";
-   . . .
-     props: {
-       routes: {
-         type: Array as PropType<RouteItem[]>,
-       },
-     },
-   . . .
-   ```
+```js
+import { PropType } from "vue-demi";
+. . .
+  props: {
+    routes: {
+      type: Array as PropType<RouteItem[]>,
+    },
+  },
+. . .
+```
 
-2. 不用 vue 的 props 校验，使用 ts 的校验。还是要写 props 属性，模板报找不到名称“routes”。 第二种方式可能会报错，采用第一种
+**第二种方式** 不用 vue 的 props 校验，使用 ts 的校验。还是要写 props 属性，模板报找不到名称“routes”。 第二种方式可能会报错，采用第一种
 
-   ```js
-   . . .
-   props: ["routes"],
-   setup: (props: { routes: RouteItem[] })
-   . . .
-   ```
+```js
+. . .
+props: ["routes"],
+setup: (props: { routes: RouteItem[] })
+. . .
+```
 
 ### shims-vue.d.ts 文件的作用
 
@@ -499,7 +499,7 @@ declare const fdate: function;
 createVuePlugin({ jsx: true }),
 ```
 
-### 问题
+### 遇到的问题
 
 1. `vue2` `setup` 中写 `tsx` 报错：`Cannot read property '$createElement' of undefined 等。setup 中不支持 (setup 中没有 this) tsx`
 
@@ -509,9 +509,7 @@ createVuePlugin({ jsx: true }),
 
    解决：手动引入 `element ui` 组件
 
-3. 配置组件属性报：`“(options?: ThisTypedComponentOptionsWithArrayProps<Vue, object, object, object, never> | undefined): Col”`错误
-
-   解决：修改 shims-tsx.d.ts 类型声明文件
+3. 配置组件属性报：`“(options?: ThisTypedComponentOptionsWithArrayProps<Vue, object, object, object, never> | undefined): Col”`错误。 解决：修改 shims-tsx.d.ts 类型声明文件：
 
    ```ts
    import Vue, { VNode } from "vue";

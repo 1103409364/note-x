@@ -1,4 +1,4 @@
-name: Deploy to Github-Pages
+name: deploy to Github-Pages
 
 on: [push] # 触发条件(git 推送时)
 
@@ -21,6 +21,5 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # 把下面这个文件夹部署到哪个分支(不能是本分支,会覆盖掉)
-          FOLDER: docs/.vitepress/dist # 想部署的文件夹
+          BRANCH: gh-pages # 部署的目标分支
+          FOLDER: docs/.vitepress/dist # 部署的静态资源文件，打包后的文件的路径

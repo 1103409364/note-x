@@ -25,8 +25,10 @@ VitePress 目前不支持搜索
 **第一步** 新建目录和 Actions 配置文件 `.github\workflows\deploy.yml`
 
 ```yml
-name: Deploy to Github-Pages
+name: deploy to Github-Pages
+
 on: [push] # 触发条件(git 推送时)
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -38,15 +40,14 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm install 
+          npm install
           npm run build
         env:
           CI: false
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # 部署的目标分支
           FOLDER: docs/.vitepress/dist # 部署的静态资源文件，打包后的文件的路径
 ```

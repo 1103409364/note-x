@@ -15,9 +15,49 @@ algolia 提供了简化的方式 Algolia DocSearch，提交自己的网站，然
 
 > 参考[VuePress 搭建个人技术文档网站教程](https://segmentfault.com/a/1190000017055963)
 
-## 打包报错
+## Vite 打包报错
 
 可能是
 
 - .md 文件的文件名使用了特殊符号，如 `+`
 - 超链接里使用了 `import.meta.env.*`
+
+## Github Pages 自动化部署
+
+[GitHub-Pages 自动化部署 + github/gitee 选择](https://blog.csdn.net/qq_39823295/article/details/108913538)
+
+使用 GitHub-Actions 实现文档更新后自动化部署到 Github Pages
+
+**第一步** 新建目录和 Actions 配置文件 `.github\workflows\deploy.yml`
+
+```yml
+name: Deploy to Github-Pages
+on: [push] # 触发条件(git 推送时)
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2 # 下面这个最好设成 false
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧
+        run: |
+          npm install 
+          npm run build
+        env:
+          CI: false
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # 部署的目标分支
+          FOLDER: docs/.vitepress/dist # 部署的静态资源文件，打包后的文件的路径
+```
+
+**第二步** 配置 Pages，进入 Github-Settings-Pages，配置 Github Pages 的 Source 分支和路径  
+**第三步** 在 main 分支提交代码测试。git 提交 push 后，在 Github-Actions 中可以看到 git 工作流执行的情况。
+
+![Actions](./img/2022-02-10-14-18-04.png)

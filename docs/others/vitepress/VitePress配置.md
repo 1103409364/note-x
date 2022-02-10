@@ -56,5 +56,6 @@ jobs:
 
 ![Actions](./img/2022-02-10-14-18-04.png)
 
-<!-- **发现 Actions 有个默认的 pages-build-deployment，哪来的？**
-自动创建的？scripts\deploy-gh.sh 脚本触发创建的？ -->
+发现 Actions 有个的 pages-build-deployment 哪来的？
+
+`uses: JamesIves/github-pages-deploy-action@releases/v3` 创建的，查看新版：[github-pages-deploy-action](https://github.com/JamesIves/github-pages-deploy-action)

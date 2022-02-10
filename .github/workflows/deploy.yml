@@ -1,0 +1,27 @@
+name: Deploy to Github-Pages
+
+on: [push] # 触发条件(git 推送时)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2 # 下面这个最好设成 false
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧
+        run: |
+          cd Website
+          npm install
+          npm run build
+        env:
+          CI: false
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # 把下面这个文件夹部署到哪个分支(不能是本分支,会覆盖掉)
+          FOLDER: Website/note-x # 想部署的文件夹

@@ -13,7 +13,6 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          cd Website
           npm install
           npm run build
         env:
@@ -24,4 +23,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # 把下面这个文件夹部署到哪个分支(不能是本分支,会覆盖掉)
-          FOLDER: Website/note-x # 想部署的文件夹
+          FOLDER: docs/.vitepress/dist # 想部署的文件夹

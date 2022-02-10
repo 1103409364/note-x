@@ -2,7 +2,7 @@
 home: true
 lang: zh-CN
 heroText: A  Personal Blog
-heroImage: /favicon.ico
+heroImage: /OneNote.svg
 actionText: 开始 →
 actionLink: /frontEnd/HTML/
 features:

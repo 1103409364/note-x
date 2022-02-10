@@ -7,7 +7,7 @@ import others from "./router/others";
 module.exports = {
   title: "Note-x", // 网站标题
   description: "Note-x with vitePress", // 网站描述
-  dest: "./dist", // 打包目录
+  dest: "../../dist", // 打包目录
   base: "/note-x/",
   // 头部head
   head: [["link", { rel: "icon", href: "/favicon.ico" }]], // 添加图标
@@ -34,15 +34,17 @@ module.exports = {
   // 主题配置
   themeConfig: {
     repo: pkg.repository,
-    // logo: "/logo.svg",
+    logo: "/OneNote.svg",
+    docsBranch: "main",
+    docsDir: "docs",
+    editLinks: true,
+    editLinkText: "为此页提供修改建议",
     // 获取每个文件最后一次 git 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部
     // lastUpdated: 'Last Updated', // string | boolean
-    search: true, //内置搜索 用不了
+    // search: true, //内置搜索 用不了
     searchMaxSuggestions: 10, //结果数量的限制
     // 启动页面丝滑滚动
     smoothScroll: true,
-    // editLinks: true,
-    // editLinkText: "为此页提供修改建议",
     // https://segmentfault.com/a/1190000015010997 全站搜索，填写文档网站的地址和邮箱进行申请
     // algolia: {
     //   apiKey: "a13e112ab3ca2b0038a9df3fae771fb3",

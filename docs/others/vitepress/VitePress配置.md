@@ -59,4 +59,4 @@ jobs:
 
 发现 Actions 有个的 pages-build-deployment 哪来的？
 
-`uses: JamesIves/github-pages-deploy-action@v4.2.3` 创建的，查看新版：[github-pages-deploy-action](https://github.com/JamesIves/github-pages-deploy-action)
+[JamesIves/github-pages-deploy-action](https://github.com/JamesIves/github-pages-deploy-action) 创建的

@@ -15,7 +15,6 @@
     "vitepress": "^0.21.6"
   },
   "devDependencies": {
-    "@vuepress/plugin-search": "^1.9.7",
     "stylus": "^0.54.8",
     "stylus-loader": "^6.1.0"
   }

@@ -34,7 +34,9 @@ Vite 官方默认模板是 Vue3 的，没有提供 Vue2 的模板。
 
 只要安装预处理器即可，自动开启 sass 支持 [官方文档](https://cn.vitejs.dev/guide/features.html#css-pre-processors)
 
-`$ yarn add sass -D`
+```bash
+yarn add sass -D
+```
 
 ### 配置全局 scss 变量
 
@@ -54,7 +56,9 @@ css: {
 [使用 mockjs 随机生成大批量常用字段的值(人名，年龄，地址，邮箱，日期……)](https://blog.csdn.net/wuyujin1997/article/details/111656446)  
 mock vite 配完后，按照 mockjs 规则写即可
 
-`yarn add mockjs vite-plugin-mock -D`
+```bash
+yarn add mockjs vite-plugin-mock -D
+```
 
 vite.config.js
 
@@ -541,7 +545,9 @@ createVuePlugin({ jsx: true }),
 
 [vite 兼容 IE、低版本浏览器方法](https://www.codeleading.com/article/62956091258/)
 
-`yarn add @vitejs/plugin-legacy -D`
+```bash
+yarn add @vitejs/plugin-legacy -D
+```
 
 兼容 IE11 配置 vite.config.js
 

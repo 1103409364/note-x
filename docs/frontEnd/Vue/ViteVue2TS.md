@@ -8,6 +8,8 @@
 > [关于 vite.config.js 相关配置](https://www.cnblogs.com/web-learn/p/15670257.html)  
 > [什么是 vite + vue3 + ts 现代开发最佳实践？](https://zhuanlan.zhihu.com/p/463047434?utm_source=wechat_session&utm_medium=social&utm_oi=35206853558272)
 
+[[toc]]
+
 ## 基础配置
 
 ### 模板&资源
@@ -22,11 +24,13 @@ Vite 官方默认模板是 Vue3 的，没有提供 Vue2 的模板。
 
 - 更多模板和 vite 相关资源 [awesome-vite#templates](https://github.com/vitejs/awesome-vite#templates)
 
-**问题** vite-vue2-windicss-starter
-模板配置提交 Eslint 报错：  
-`ESLint: 8.0.1 No files matching the pattern "'./src/\*_/_.{js,ts,tsx,vue,md}'" were found. Please check for typing mistakes in the pattern.`
+**问题** vite-vue2-windicss-starter 模板配置提交 Eslint 报错：  
+::: danger error
+ESLint: 8.0.1 No files matching the pattern "'./src/\*_/_.{js,ts,tsx,vue,md}'" were found. Please check for typing mistakes in the pattern.  
+:::
 
-**解决** scripts lint 命令加参数 `--no-error-on-unmatched-pattern`，同时修改 eslint 匹配规则：  
+**解决** scripts lint 命令加参数 `--no-error-on-unmatched-pattern`，同时修改 eslint 匹配规则：
+
 `"lint": "eslint './src/\*_/_.{js,ts,tsx,vue,md}' --no-error-on-unmatched-pattern"`  
 `"lint:fix": "eslint --fix --ext .ts,.js,.vue src --no-error-on-unmatched-pattern",`
 

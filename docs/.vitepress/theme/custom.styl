@@ -1,29 +1,29 @@
 :root{
-  --c-brand #23d0d0
-  --c-brand-light #1dbdd2
+  --c-brand #AE4BD5//#7719AA//#23d0d0
+  --c-brand-light #CA64EA
 
   // 主色调
   --color-main var(--c-brand)
   // 底部栏色调
-  --color-border #4dd0e1
+  --color-border var(--c-brand)//#4dd0e1
   // 引用字体色
-  --color-block #4dd0e1
+  --color-block var(--c-brand)//#4dd0e1
   // 加粗色调
-  --color-strong #26c6da
+  --color-strong var(--c-brand)
   // 代码样式
-  --color-code #409EFF
+  --color-code var(--c-brand)
   // 引用边框色
-  --color-border-left #26c6da
+  --color-border-left var(--c-brand-light)
 
   // 代码背景色
   --color-code-bg rgba(77,208,225,.08)
   // 引用背景色
-  --color-block-bg rgba(77,208,225,.15)
+  --color-block-bg  rgba(217, 136, 241, 0.15)//rgba(77,208,225,.15)
 }
 
 .home-features .container h2{
-  line-height 56px
-  padding-bottom 0
+  line-height 50px
+  // padding-bottom 0
   &:before{
     content: '';
     position: absolute;
@@ -31,7 +31,7 @@
     top: 12px;
     width: 26px;
     height: 26px;
-    background-image: url(/eletron.png);
+    background-image url("/electron.svg");
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: contain;
@@ -249,7 +249,7 @@ a.sidebar-link-item.active{
 
 .container strong {
   font-weight: bold;
-  color #26c6da
+  color  var(--c-brand)
   padding 0 6px
   &:after{
     content ' ]'
@@ -357,7 +357,7 @@ a.sidebar-link-item.active{
     top 12px
     width 26px
     height 26px
-    background-image url("/eletron.png")
+    background-image url("/electron.svg")
     background-position 0 0
     background-repeat no-repeat
     background-size contain
@@ -928,14 +928,14 @@ a.sidebar-link-item.active{
   padding-right: 20px;
 }
 
-.container code {
-  padding: .2em .4em;
-  margin: 0;
-  font-size: 85%;
-  border-radius: 3px;
-  background: var(--color-code-bg);
-  color: var(--color-code);
-}
+// .container code {
+  // padding: .2em .4em;
+  // margin: 0;
+  // font-size: 85%;
+  // border-radius: 3px;
+  // background: var(--color-code-bg);
+  // color: var(--color-code);
+// }
 
 // .container pre {
 //   word-wrap: normal;
@@ -969,17 +969,17 @@ a.sidebar-link-item.active{
 //   border-radius: 3px;
 // }
 
-.container pre code {
-  display: inline;
-  max-width: auto;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  line-height: inherit;
-  word-wrap: normal;
-  background-color: initial;
-  border: 0;
-}
+// .container pre code {
+//   display: inline;
+//   max-width: auto;
+//   padding: 0;
+//   margin: 0;
+//   overflow: visible;
+//   line-height: inherit;
+//   word-wrap: normal;
+//   background-color: initial;
+//   border: 0;
+// }
 
 .container .commit-tease-sha {
   display: inline-block;

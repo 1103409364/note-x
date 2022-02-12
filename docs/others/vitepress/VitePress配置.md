@@ -15,6 +15,7 @@ VitePress 目前不支持搜索
 
 - .md 文件的文件名使用了特殊符号，如 `+`
 - 超链接里使用了 `import.meta.env.*`
+- 存在死链(!) Found dead link ./unplugin-vue-components
 
 ## Github Pages 自动化部署
 

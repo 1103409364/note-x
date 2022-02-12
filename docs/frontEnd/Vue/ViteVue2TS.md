@@ -468,7 +468,7 @@ interface 能实现就用 interface，否则用 type
   vue2 版本定义完类型声明文件，提示：`(property) ElButton: typeof Button`。  
   vue3 的 element ui，提供了 global.d.ts。鼠标悬停在组件上可以显示它有哪些属性。
 
-- 自定义组件：手动引入的 TS 写的组件，自动提供类型提示。全局组件需要像 UI 组件一样定义全局组件类型声明文件。vite 提供了配置项，可以自动生成该文件。借助插件 [unplugin-vue-components](unplugin-vue-components)
+- 自定义组件：手动引入的 TS 写的组件，自动提供类型提示。全局组件需要像 UI 组件一样定义全局组件类型声明文件。vite 提供了配置项，可以自动生成该文件。借助插件 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-componentss)
 
   ```js
   ViteComponents({

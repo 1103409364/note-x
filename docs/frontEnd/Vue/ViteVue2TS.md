@@ -36,9 +36,9 @@ ESLint: 8.0.1 No files matching the pattern "'./src/\*_/_.{js,ts,tsx,vue,md}'" w
 
 ### 支持 setup 语法糖
 
-[单文件组件 `<script setup>`](https://v3.cn.vuejs.org/api/sfc-script-setup.html#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95)  
-[强烈推荐!Vue3.2 中的 setup 语法糖](https://www.jb51.net/article/231485.htm#_lab2_3_2)
-
+[官方文档：单文件组件 `<script setup>`](https://v3.cn.vuejs.org/api/sfc-script-setup.html#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95)  
+[强烈推荐!Vue3.2 中的 setup 语法糖](https://www.jb51.net/article/231485.htm#_lab2_3_2)  
+[你不知道的`<script setup>`不完全攻略](https://juejin.cn/post/6941261566985650183)
 通过插件 [unplugin-vue2-script-setup](https://github.com/antfu/unplugin-vue2-script-setup#readme) 支持。
 [官方示例](https://github.com/antfu/unplugin-vue2-script-setup/tree/main/playground)
 
@@ -95,6 +95,15 @@ module.exports = {
   },
 };
 ```
+
+**问题** 如何获取当前实例？
+
+```ts
+import { getCurrentInstance } from "vue-demi";
+const vm = getCurrentInstance()?.proxy; // 相当于this
+```
+
+vue3 在弱化 this，推荐使用 `{ useRoute, useRouter }` 通过 composable 的方式获取路由实例、store 等。目前在 vue2 中还是要使用 this。
 
 ### Sass 配置
 
@@ -495,6 +504,8 @@ import { PropType } from "vue-demi";
 第二种方式：使用 setup 语法糖 + TS 进行类型校验 **推荐**
 
 ```ts
+// withDefaults、defineProps 不需要导入 网上文章有误，参考官方文档
+
 interface IProps {
   field1: string; // ?: 可选属性
 }
@@ -579,15 +590,17 @@ field as keyof typeof messages;
 `keyof` 该操作符可以用于获取某种类型的所有键，其返回类型是联合类型  
 `typeof` 可以 获取一个值的类型，通过这个类型进行声明
 
-### 模板过滤器 ts 报未定义
+### 模板过滤器问题
 
-声明全局变量 global.d.ts
+- ts 报未定义。声明全局变量 global.d.ts
 
-```ts
-declare const $msg: { [key: string]: string };
-declare const selectEcho: function;
-declare const fdate: function;
-```
+  ```ts
+  declare const $msg: { [key: string]: string };
+  declare const selectEcho: function;
+  declare const fdate: function;
+  ```
+
+- 过滤器 | ts 报：算术运算左侧必须是 "any"、"number"、"bigint" 或枚举类型。[vue3 已经移除过滤器](https://v3.cn.vuejs.org/guide/migration/filters.html)。建议用方法调用或计算属性来替换它们。或者将数据转 any 抑制报错。
 
 ## TSX 实践
 

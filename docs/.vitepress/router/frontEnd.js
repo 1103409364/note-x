@@ -32,6 +32,14 @@ export default [
         text: "Vite+Vue2+TS",
         link: "/frontEnd/Vue/ViteVue2TS",
       },
+      {
+        text: "Vue踩坑记录",
+        link: "/frontEnd/Vue/Vue踩坑记录",
+      },
+      {
+        text: "ElementUI2 踩坑记录",
+        link: "/frontEnd/Vue/ElementUI2踩坑记录",
+      },
     ],
   },
   {

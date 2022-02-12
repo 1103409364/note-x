@@ -1,0 +1,18 @@
+# Vue 踩坑记录
+
+记录工作中遇到的问题，及解决方案。
+
+## 刷新 query 参数消失
+
+### 路由对象属性
+
+[官方文档：完整的导航解析流程](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%AE%8C%E6%95%B4%E7%9A%84%E5%AF%BC%E8%88%AA%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B)  
+`$route.query` 一个 key/value 对象，表示 URL 查询参数。  
+`$route.path` 字符串，对应当前路由的路径。  
+`$route.fullPath` 完成解析后的 URL，包含查询参数和 hash 的完整路径。
+
+**原因**
+当浏览器刷新时，触发 导航守卫 路由守卫 ` beforeResolve``、beforeEach ` 方法等，在 `next(path: to.path)` 时丢了参数。
+
+**解决方案**
+将 `next(path: to.path)` 修改为 `next(path: to.fullPath)`。

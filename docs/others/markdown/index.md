@@ -8,4 +8,4 @@ Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯。它允
 
 语义和格式（外观）
 
-Word、OneNote 的语义和格式是一体的。Markdown 语义和格式是分离的，它更关注的是语义，Markdown 可以使用不同的来呈现不同的样式。
+Word、OneNote 的语义和格式是一体的。Markdown 语义和格式是分离的，它更关注的是语义，Markdown 可以使用不同的 css 主题来呈现不同的样式。

@@ -34,6 +34,68 @@ ESLint: 8.0.1 No files matching the pattern "'./src/\*_/_.{js,ts,tsx,vue,md}'" w
 `"lint": "eslint './src/\*_/_.{js,ts,tsx,vue,md}' --no-error-on-unmatched-pattern"`  
 `"lint:fix": "eslint --fix --ext .ts,.js,.vue src --no-error-on-unmatched-pattern",`
 
+### 支持 setup 语法糖
+
+[单文件组件 `<script setup>`](https://v3.cn.vuejs.org/api/sfc-script-setup.html#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95)  
+[强烈推荐!Vue3.2 中的 setup 语法糖](https://www.jb51.net/article/231485.htm#_lab2_3_2)
+
+通过插件 [unplugin-vue2-script-setup](https://github.com/antfu/unplugin-vue2-script-setup#readme) 支持。
+[官方示例](https://github.com/antfu/unplugin-vue2-script-setup/tree/main/playground)
+
+**配置 Volar：** 安装 Volar 禁用 Vetur。需要安装@vue/runtime-dom 为 devDependencies 才能使其在 Vue 2 上运行
+
+```bash
+yarn add @vue/runtime-dom -D
+```
+
+支持 Vue 2 模板
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["unplugin-vue2-script-setup/types"]
+  },
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
+  }
+}
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+import { createVuePlugin as Vue2 } from "vite-plugin-vue2";
+import ScriptSetup from "unplugin-vue2-script-setup/vite";
+
+export default defineConfig({
+  //
+  plugins: [Vue2(), ScriptSetup({ reactivityTransform: false })],
+});
+```
+
+`reactivityTransform:false` 关闭实验性 [Ref Sugar（take 2）](https://github.com/vuejs/rfcs/discussions/369)实现。
+
+```ts
+// shims-vue.d.ts
+/// <reference types="unplugin-vue2-script-setup/shims.js" />
+/// <reference types="unplugin-vue2-script-setup/ref-macros.js" />
+...
+```
+
+修改 eslint 配置，支持 setup 全局的方法。
+配置后 eslint 插件报错：[Environment key "vue/setup-compiler-macros" is unknown](https://stackoverflow.com/questions/69796772/what-is-causing-error-eslintrc-js-environment-key-vue-setup-compiler-macros/69806781)。需要更新 eslint 和 eslint-plugin-vue，更新后重启 vscode。
+
+```js
+// .eslintrc.js
+module.exports = {
+  env: {
+    node: true,
+    "vue/setup-compiler-macros": true,
+  },
+};
+```
+
 ### Sass 配置
 
 只要安装预处理器即可，自动开启 sass 支持 [官方文档](https://cn.vitejs.dev/guide/features.html#css-pre-processors)
@@ -144,7 +206,7 @@ const config = defineConfig({
 按需引入配置：`Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };`  
 全局引入配置：`Vue.use(Element, { size: 'small', zIndex: 3000});`
 
-使用分解其自动按需引入的方式，element 组件不会经过 legacy 处理，**不兼容 ie**，改为全量引入
+使用分解其自动按需引入的方式，element 组件不会经过 legacy 处理，**不兼容 ie**，改为全量引入。
 
 **问题**
 全量引入 element ui 的 css 打包报警告：`"@charset" must be the first rule in the file` 且会导致打包速度变慢。sass 编译的时候，因为被编译的文件里有中文，所以会这样。
@@ -207,7 +269,7 @@ export default defineConfig({
 - VueUse 基本 Vue 组合实用程序的集合 5 个可以加速开发的 VueUse 函数库。
 - unplugin-vue-components [自动引入(组件,ui(Element-ui)库,vue hooks 等)](https://vue-js.com/topic/61d7be4503eaf00040d48063)
 - Vuesax 是基于 Vue.js 的 UI 框架，零开始设计，可以逐步采用。
-- Vue Volar Extension Pack 包含 12 个扩展。 其中 volar 配合 ts 在模板中提供更好的语法提示。[Volar - vue 终极开发神器！](https://juejin.cn/post/6966106927990308872#heading-0)
+- Vue Volar Extension Pack 包含 12 个扩展。
 - Vue 3 Snippets 基于最新的 Vue 2 及 Vue 3 的 API 添加了 Code Snippets。
 
 ## 代码规范
@@ -382,9 +444,42 @@ interface 能实现就用 interface，否则用 type
 [TypeScript 在 vue 中定义全局类型](https://www.cnblogs.com/leslie1943/p/13466943.html)  
 类型声明文件统一放在/src/types 目录
 
+### Volar + TS 在 vue 中提供更好的类型提示
+
+[Volar - vue 终极开发神器！](https://juejin.cn/post/6966106927990308872#heading-0)  
+[缺少 UI 库类型提示，你可能使用的是阉割版的 Volar+Vue](https://juejin.cn/post/7043723576121229342)
+
+- 在 vue 模板中，提供更好的类型提示。
+- UI 组件：要看有没有提供类型声明文件。
+
+  vue2 的 element ui 不是用 TS 写的，组件没有类型提示，需要自定义类型声明文件：
+
+  ```ts
+  // GlobalComponents for Volar 为 Volar 准备的声明文件
+  declare module "vue" {
+    export interface GlobalComponents {
+      ElButton: typeof import("element-plus")["ElButton"]; // vue3
+      ElButton: typeof import("element-ui")["Button"]; //vue2
+      // ...
+    }
+  }
+  ```
+
+  vue2 版本定义完类型声明文件，提示：`(property) ElButton: typeof Button`。  
+  vue3 的 element ui，提供了 global.d.ts。鼠标悬停在组件上可以显示它有哪些属性。
+
+- 自定义组件：手动引入的 TS 写的组件，自动提供类型提示。全局组件需要像 UI 组件一样定义全局组件类型声明文件。vite 提供了配置项，可以自动生成该文件。借助插件 [unplugin-vue-components](unplugin-vue-components)
+
+  ```js
+  ViteComponents({
+    dirs: ["src/components"], //自动导入自己的组件，默认src/components
+    dts: "src/types/components.d.ts", // 生成类型声明文件
+  });
+  ```
+
 ### 组件 props 类型校验
 
-**第一种方式** 使用 vue 的 props 校验+vue 提供的 PropType 增强校验，可以有默认值。
+第一种方式：使用 vue 的 props 校验+vue 提供的 PropType 增强校验，可以有默认值。
 
 ```js
 import { PropType } from "vue-demi";
@@ -397,13 +492,15 @@ import { PropType } from "vue-demi";
 . . .
 ```
 
-**第二种方式** 不用 vue 的 props 校验，使用 ts 的校验。还是要写 props 属性，模板报找不到名称“routes”。 第二种方式可能会报错，采用第一种
+第二种方式：使用 setup 语法糖 + TS 进行类型校验 **推荐**
 
-```js
-. . .
-props: ["routes"],
-setup: (props: { routes: RouteItem[] })
-. . .
+```ts
+interface IProps {
+  field1: string; // ?: 可选属性
+}
+const props = withDefaults(defineProps<IProps>(), {
+  field1: "", // 默认值
+});
 ```
 
 ### shims-vue.d.ts 文件的作用
@@ -511,13 +608,13 @@ createVuePlugin({ jsx: true }),
 
 1. `vue2` `setup` 中写 `tsx` 报错：`Cannot read property '$createElement' of undefined 等。setup 中不支持 (setup 中没有 this) tsx`
 
-   解决：写在 `render` 选项中
+   解决：写在 `render` 选项中，或者引入 [babel-preset-vca-jsx](https://github.com/luwanquan/babel-preset-vca-jsx)
 
 2. jsx 中用帕斯卡 PascalCase 风格 element 组件标签， ts 报：未定义变量
 
    解决：手动引入 `element ui` 组件
 
-3. 配置组件属性报：`“(options?: ThisTypedComponentOptionsWithArrayProps<Vue, object, object, object, never> | undefined): Col”`错误。 解决：修改 shims-tsx.d.ts 类型声明文件：
+3. 配置组件属性，TS 报错：`“(options?: ThisTypedComponentOptionsWithArrayProps<Vue, object, object, object, never> | undefined): Col”`错误。 解决：修改 shims-tsx.d.ts 类型声明文件：
 
    ```ts
    import Vue, { VNode } from "vue";
@@ -540,6 +637,9 @@ createVuePlugin({ jsx: true }),
      }
    }
    ```
+
+4. TS 报错 `(method) render?(createElement: CreateElement, hack: RenderContext<DefaultProps>): VNode`
+   没有与此调用匹配的重载。未解决
 
 ## IE 兼容
 
@@ -591,7 +691,8 @@ export default {
 ### Element ui 在 ie11 中报错
 
 使用解析器 ElementUiResolver 自动按需加载，打包时出问题：不会经过 @vitejs/plugin-legacy
-解决方式：改为全局引入 element ui
+解决方式：改为全局引入 element ui  
+[issue](https://github.com/antfu/unplugin-vue-components/issues/212)
 
 ### svgIcon 兼容性问题
 

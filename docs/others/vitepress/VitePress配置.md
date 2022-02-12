@@ -20,7 +20,7 @@ VitePress 目前不支持搜索
 
 [GitHub-Pages 自动化部署 + github/gitee 选择](https://blog.csdn.net/qq_39823295/article/details/108913538)
 
-使用 GitHub-Actions 实现文档更新后自动化部署到 Github Pages
+使用 GitHub-Actions 实现文档更新后自动部署到 Github Pages：
 
 **第一步** 新建目录和 Actions 配置文件 `.github\workflows\deploy.yml`
 

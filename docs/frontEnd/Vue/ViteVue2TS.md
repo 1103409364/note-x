@@ -449,6 +449,8 @@ export const state = reactive({
     const store = useStore(); //需要在setup中执行
     ```
 
+  - 使用[pinia](https://github.com/vuejs/pinia)。Pinia 优势：符合直觉，易于学习；极轻， 仅有 1 KB；模块化设计，便于拆分状态
+
 ## composable
 
 将逻辑提取到 composable 函数中，避免逻辑堆积，导致组件文件过长，提高可读性和可维护性。

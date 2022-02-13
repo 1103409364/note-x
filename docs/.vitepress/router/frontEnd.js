@@ -33,7 +33,7 @@ export default [
         link: "/frontEnd/Vue/ViteVue2TS",
       },
       {
-        text: "Vue踩坑记录",
+        text: "Vue 踩坑记录",
         link: "/frontEnd/Vue/Vue踩坑记录",
       },
       {

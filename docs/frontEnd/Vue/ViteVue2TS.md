@@ -602,6 +602,12 @@ field as keyof typeof messages;
 
 - 过滤器 | ts 报：算术运算左侧必须是 "any"、"number"、"bigint" 或枚举类型。[vue3 已经移除过滤器](https://v3.cn.vuejs.org/guide/migration/filters.html)。建议用方法调用或计算属性来替换它们。或者将数据转 any 抑制报错。
 
+### 其他问题
+
+- 组件改名后 `import { getImg } from "@/utils";` ts 报找不到模块的类型声明  
+  **原因** 只改了大小写。系统对文件名大小写是不敏感的。这样导致一系列的问题，git 也会有问题。  
+  **解决** 起一个新名字。或者其一个临时的名字，提交后再改回去。
+
 ## TSX 实践
 
 > [vite-vue2-tsx-composition-api](https://github.com/caoxiemeihao/vite-vue2-tsx-composition-api) 项目混用 vue-cli 和 vite  

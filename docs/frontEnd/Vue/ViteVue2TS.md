@@ -553,6 +553,23 @@ declare module "axios" {
 }
 ```
 
+### 扩展 axios config
+
+让 axios 支持自定义 config：
+
+```ts
+// shims-axios.d.ts
+import { AxiosRequestConfig } from "axios";
+// 扩展配置
+interface AxiosRequestConfigExtend extends AxiosRequestConfig {
+  customErr?: boolean; //手动处理错误
+}
+```
+
+如何获取 axios 的自定义 config？  
+`request` 拦截器在 `config` 中获取自定义属性。  
+`response` 拦截器在 `error.response.config` 或 `response.config` 中获取自定义属性。
+
 ### 自定义指令
 
 组件引入自定义指令时 `directives: { draggable }`，模板报错，变量找不到名称 xxx，改为 setup 可以解决？

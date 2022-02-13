@@ -42,7 +42,8 @@ ESLint: 8.0.1 No files matching the pattern "'./src/\*_/_.{js,ts,tsx,vue,md}'" w
 通过插件 [unplugin-vue2-script-setup](https://github.com/antfu/unplugin-vue2-script-setup#readme) 支持。
 [官方示例](https://github.com/antfu/unplugin-vue2-script-setup/tree/main/playground)
 
-**配置 Volar：** 安装 Volar 禁用 Vetur。需要安装@vue/runtime-dom 为 devDependencies 才能使其在 Vue 2 上运行
+安装 Volar 禁用 Vetur。  
+需要安装@vue/runtime-dom 为 devDependencies 才能使其在 Vue 2 上运行。
 
 ```bash
 yarn add @vue/runtime-dom -D
@@ -415,6 +416,38 @@ export const state = reactive({
 不同组件导入这个 state，就能实现状态共享了。任意一个组件改变状态，另一个组件的状态也会跟着变化
 
 通过 provide 注入全局，可以实现类似 vuex 的效果。缺点是 vue-devtool 观察不到数据变化
+
+### 如何使用全局方法、路由、Vuex
+
+参考 [Vue 2 落地 TypeScript 指南](https://juejin.cn/post/6990543774552162340#heading-8) 引入 [vue2-helpers](https://github.com/ambit-tsai/vue2-helpers#readme) 内部也是用了 `getCurrentInstance`，意义在于抹平语法差异，便于迁移。[不推荐在应用的代码中使用 `getCurrentInstance`](https://v3.cn.vuejs.org/api/composition-api.html#getcurrentinstance)。
+
+- 全局方法
+
+  - `setup` 函数的第二个参数 `ctx` 是一个对象，其中 `ctx.root`可以当成 `this` 使用。`ctx.$message('msg')`。`vue3` 不推荐使用。
+  - `getCurrentInstance` 获取组件实例。`getCurrentInstance()?.proxy;` `proxy` 相当于 `this`。`vue3` 不推荐。
+  - `import Vue from "vue"; Vue.prototype.$message("111");` 将全局方法挂载到 vue 原型上。vue2 推荐使用这种方法。
+
+- 使用路由
+
+  - 获取组件实例，通过 vm.$router 的方式使用。获取方式同上。
+  - 用 vue2-helpers。
+
+    ```ts
+    import { useRouter, useRoute } from "vue2-helpers/vue-router";
+    const router = useRouter(); //需要在 setup 中调用
+    const route = useRoute(); //需要在 setup 中调用
+    ```
+
+- 获取 `Vuex store`
+
+  - 获取组件实例，通过 `vm.$store` 的方式使用。获取方式同上。
+  - 直接导入 `store` 的方式使用 `Vuex。`
+  - 用 `vue2-helpers`。改造 `store`，创建 `store` 的写法（`createStore`）和当前差异较大，使用 `store` 较为简洁。
+
+    ```ts
+    import { useStore } from "vue2-helpers/vuex";
+    const store = useStore(); //需要在setup中执行
+    ```
 
 ## composable
 

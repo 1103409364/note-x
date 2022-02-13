@@ -5,7 +5,7 @@
   "repository": "https://github.com/1103409364/note-x",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress dev docs",
+    "dev": "vitepress dev docs --port 9527",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
     "pages": "bash scripts/deploy-gh.sh"

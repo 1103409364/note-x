@@ -20,8 +20,8 @@ export default [
     text: "Javascript",
     link: "/frontEnd/Javascript/",
     children: [
-      { text: "基础", link: "/frontEnd/Javascript/" },
-      { text: "进阶", link: "/frontEnd/Javascript/advanced" },
+      { text: "基础", link: "/frontEnd/Javascript/Javascript基础" },
+      { text: "进阶", link: "/frontEnd/Javascript/Javascript进阶" },
       { text: "问题记录", link: "/frontEnd/Javascript/问题记录" },
     ],
   },

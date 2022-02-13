@@ -607,6 +607,12 @@ field as keyof typeof messages;
 - 组件改名后 `import { getImg } from "@/utils";` ts 报找不到模块的类型声明  
   **原因** 只改了大小写。系统对文件名大小写是不敏感的。这样导致一系列的问题，git 也会有问题。  
   **解决** 起一个新名字。或者其一个临时的名字，提交后再改回去。
+- `export default []` 的类型推导问题。解决：声明一个中间变量接一下。
+
+  ```ts
+  const userCenter = [];
+  export default userCenter;
+  ```
 
 ## TSX 实践
 

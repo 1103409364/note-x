@@ -267,6 +267,22 @@ export default defineConfig({
 });
 ```
 
+### vite 问题记录
+
+- [vite + moment.js 中文国际化失效](https://www.jianshu.com/p/5256c691d9bd)
+
+  vite 只支持 ES modules
+
+  ```ts
+  import moment from "moment";
+  import "moment/dist/locale/zh-cn";
+  moment.locale("zh-cn");
+  ```
+
+- sourcemap 丢失，打断点无法映射源码。
+  **原因** 某个依赖的问题
+  **解决** 恢复 "unplugin-vue-components": "^0.17.11"版, 恢复 yarn.lock 解决依赖问题。
+
 ### 不支持的
 
 - scss js 变量共享 vite 好像不支持。[windicss 颜色主题](https://cn.windicss.org/utilities/colors.html#customization) 和 scss 变量要分开配置，或者放弃 scss 变量，统一使用 windicss。
@@ -421,35 +437,47 @@ export const state = reactive({
 
 参考 [Vue 2 落地 TypeScript 指南](https://juejin.cn/post/6990543774552162340#heading-8) 引入 [vue2-helpers](https://github.com/ambit-tsai/vue2-helpers#readme) 内部也是用了 `getCurrentInstance`，意义在于抹平语法差异，便于迁移。[不推荐在应用的代码中使用 `getCurrentInstance`](https://v3.cn.vuejs.org/api/composition-api.html#getcurrentinstance)。
 
-- 全局方法
+- `setup` 函数的第二个参数 `ctx` ， `ctx.root`可以当成 `this` 使用。`ctx.$message('msg')`。`vue3` 不推荐。
+- `getCurrentInstance` 获取组件实例。`getCurrentInstance()?.proxy;` `proxy` 相当于 `this`。`vue3` 不推荐。
+- `import Vue from "vue"; Vue.prototype.$message("111");` 将全局方法挂载到 vue 原型上。
+- 直接导入 `store` 的方式使用 `Vuex`。
+- 使用[pinia](https://github.com/vuejs/pinia)替代 vuex。优势：符合直觉，易于学习；极轻， 仅有 1 KB；模块化设计，便于拆分状态
+- 使用 vue2-helpers
 
-  - `setup` 函数的第二个参数 `ctx` 是一个对象，其中 `ctx.root`可以当成 `this` 使用。`ctx.$message('msg')`。`vue3` 不推荐使用。
-  - `getCurrentInstance` 获取组件实例。`getCurrentInstance()?.proxy;` `proxy` 相当于 `this`。`vue3` 不推荐。
-  - `import Vue from "vue"; Vue.prototype.$message("111");` 将全局方法挂载到 vue 原型上。vue2 推荐使用这种方法。
+  ```ts
+  import { useRouter, useRoute, useStore } from "vue2-helpers/vue-router";
+  const router = useRouter(); //需要在 setup 中调用
+  const route = useRoute(); //需要在 setup 中调用
+  const store = useStore(); //需要在setup中执行
+  ```
 
-- 使用路由
+- `vue2-helpers`实际上是对`getCurrentInstance`的封装，可以封装自己的 `vue2-helpers`。
 
-  - 获取组件实例，通过 vm.$router 的方式使用。获取方式同上。
-  - 用 vue2-helpers。
+  ```ts
+  //utils
+  import { getCurrentInstance } from "@vue/composition-api";
+  export const { warn } = console;
 
-    ```ts
-    import { useRouter, useRoute } from "vue2-helpers/vue-router";
-    const router = useRouter(); //需要在 setup 中调用
-    const route = useRoute(); //需要在 setup 中调用
-    ```
+  export const OUT_OF_SCOPE =
+    "getCurrentInstance() returned null. Method must be called at the top of a setup function";
 
-- 获取 `Vuex store`
+  export const getProp = (key: string) => {
+    const inst = getCurrentInstance();
+    if (inst) {
+      return inst.proxy[key as keyof typeof inst.proxy];
+    } else {
+      warn(OUT_OF_SCOPE);
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return undefined as any;
+  };
 
-  - 获取组件实例，通过 `vm.$store` 的方式使用。获取方式同上。
-  - 直接导入 `store` 的方式使用 `Vuex。`
-  - 用 `vue2-helpers`。改造 `store`，创建 `store` 的写法（`createStore`）和当前差异较大，使用 `store` 较为简洁。
+  export const useMessage = () => getProp("$message");
 
-    ```ts
-    import { useStore } from "vue2-helpers/vuex";
-    const store = useStore(); //需要在setup中执行
-    ```
-
-  - 使用[pinia](https://github.com/vuejs/pinia)。Pinia 优势：符合直觉，易于学习；极轻， 仅有 1 KB；模块化设计，便于拆分状态
+  // **.vue 通过这种方式使用
+  import { useMessage } from "@/utils";
+  const message = useMessage(); //需要在setup中执行
+  ```
 
 ## composable
 
@@ -656,7 +684,7 @@ field as keyof typeof messages;
 
 ### 其他问题
 
-- 组件改名后 `import { getImg } from "@/utils";` ts 报找不到模块的类型声明  
+- 组件改名后 `import { getImg } from "@/utils";` ts 报找不到模块的类型声明。  
   **原因** 只改了大小写。系统对文件名大小写是不敏感的。这样导致一系列的问题，git 也会有问题。  
   **解决** 起一个新名字。或者其一个临时的名字，提交后再改回去。
 - `export default []` 的类型推导问题。解决：声明一个中间变量接一下。
@@ -664,6 +692,16 @@ field as keyof typeof messages;
   ```ts
   const userCenter = [];
   export default userCenter;
+  ```
+
+- [纯 ts 的方式](https://v3.cn.vuejs.org/api/sfc-script-setup.html#defineprops-%E5%92%8C-defineemits)定义事件，会导致 volar 的组件类型提示失效。
+  **解决** 改用不传泛型参数的方式声明。
+
+  ```ts
+  // 定义事件
+  const emit = defineEmits(["input"]);
+  // ts方式声明事件导致volar组件类型提示失效
+  const emit = defineEmits<{ (e: "input", val: string): void }>();
   ```
 
 ## TSX 实践

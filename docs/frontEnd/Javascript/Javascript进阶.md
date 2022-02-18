@@ -34,6 +34,26 @@ const handleDrop = (e, targetIndex) => {
 };
 ```
 
+## 实现自定义右键菜单
+
+<https://www.icodebang.com/article/184752>
+通过阻止 `contextmenu` 的默认行为，实现自定义菜单。通过鼠标事件参数 e，获取鼠标位置确定菜单位置。
+
+```html
+<div @contextmenu.prevent="openMenu($event)" @click="menuVisible = false"></div>
+```
+
+```ts
+const menuVisible = ref(true);
+const top = ref(0);
+const left = ref(0);
+const openMenu = (e: MouseEvent) => {
+  left.value = e.offsetX;
+  top.value = e.offsetY;
+  menuVisible.value = true;
+};
+```
+
 <!-- ## 数据类型
 
 ### == 操作符的强制类型转换规则？

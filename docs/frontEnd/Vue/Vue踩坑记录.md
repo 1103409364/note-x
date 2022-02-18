@@ -14,5 +14,17 @@
 **原因**
 当浏览器刷新时，触发 导航守卫 路由守卫 ` beforeResolve``、beforeEach ` 方法等，在 `next(path: to.path)` 时丢了参数。
 
-**解决方案**
+**解决**
 将 `next(path: to.path)` 修改为 `next(path: to.fullPath)`。
+
+### 子组件数据更新不及时
+
+父组件多次修改通过 props 传入子组件的参数，子组件每次处理参数时获取不到最新的数据（是指在方法中使用参数、不是直接在 html 中展示），获取到的是上一次传入的数据。  
+**解决** 在 nextTick 中调用子组件方法
+
+### "TypeError: sub is not a function"
+
+在 vue2 项目中发现这个报错  
+**原因**
+devtools 和 vuex 版本不匹配，详见 [issue](https://github.com/vuejs/devtools/issues/1686) 。
+**解决** 升级 vuex 到 3.62，3.x 的最后一个版本。

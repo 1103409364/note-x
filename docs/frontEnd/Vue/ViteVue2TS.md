@@ -300,7 +300,7 @@ export default defineConfig({
 
 ## 代码规范
 
-> [VUE 项目中的 commit 提交规范插件](https://blog.csdn.net/biraotian/article/details/113629230)  
+> [JavaScript 命名约定最佳实践](https://mp.weixin.qq.com/s/4Nr5Y-ngFVqw__J_yE_mkw) > [VUE 项目中的 commit 提交规范插件](https://blog.csdn.net/biraotian/article/details/113629230)  
 > [Vue 的 ESLint-stylelint-prettier 联合配置](https://blog.csdn.net/weixin_45191649/article/details/109818249)  
 > [eslint-plugin-vue 文档](https://eslint.vuejs.org/)  
 > [Vue 风格指南](https://cn.vuejs.org/v2/style-guide/)  
@@ -338,7 +338,7 @@ module.exports = {
         registeredComponentsOnly: false,
         ignores: [],
       },
-    ], //模板中组件名PascalCase
+    ], //模板中组件名PascalCase，和类名保持一致
     "vue/name-property-casing": ["error", "PascalCase"], //组件名PascalCase
     "vue/match-component-file-name": [
       "error",
@@ -663,12 +663,20 @@ interface AxiosRequestConfigExtend extends AxiosRequestConfig {
 
 ```ts
 field as keyof typeof messages;
-
 (args: typeof xxx) => {};
 ```
 
 `keyof` 该操作符可以用于获取某种类型的所有键，其返回类型是联合类型  
 `typeof` 可以 获取一个值的类型，通过这个类型进行声明
+
+### 获取对象所有的值的联合类型
+
+```ts
+type ValueOf<T> = T[keyof T];
+
+type Foo = { a: string; b: number };
+type ValueOfFoo = ValueOf<Foo>; // string | number
+```
 
 ### 模板过滤器问题
 

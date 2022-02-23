@@ -1,4 +1,4 @@
-# ElementUI2 踩坑记录
+# ElementUI2 踩坑
 
 记录工作中遇到的问题，及解决方案。
 
@@ -50,4 +50,19 @@ el-select 除了可以绑定单个字段，还可以绑定对象。应对选择�
   >
   </el-option>
 </el-select>
+```
+
+## el-select 允许创建新项，失去焦点保留输入的值
+
+利用 el-select 的 visible-change 事件获取值
+
+```js
+const visibleChange = (val: string) => {
+  if (!$attrs["allow-create"]) return;
+  if (!val) {
+    let input = (searchSelectRef as ElSelect).$children[0].$refs
+      .input as HTMLInputElement;
+    emit("update:val", input?.value);
+  }
+};
 ```

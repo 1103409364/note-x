@@ -712,6 +712,19 @@ type ValueOfFoo = ValueOf<Foo>; // string | number
   const emit = defineEmits<{ (e: "input", val: string): void }>();
   ```
 
+- 此表达式不可构造，类型 `"typeof import("jsencrypt")"` 没有构造签名。模块中需要 `default` 导出
+
+  ```ts
+  declare module "jsencrypt" {
+    export class JSEncrypt {
+      constructor();
+      setPublicKey(pk: string): void;
+      encrypt(key: string): string;
+    }
+    export default JSEncrypt; //需要导出
+  }
+  ```
+
 ## TSX 实践
 
 > [vite-vue2-tsx-composition-api](https://github.com/caoxiemeihao/vite-vue2-tsx-composition-api) 项目混用 vue-cli 和 vite  
